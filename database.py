@@ -18,10 +18,9 @@ from reportlab.pdfbase.ttfonts import TTFont
 # --- 1. إعدادات الاتصال الآمنة (باستخدام Secrets) ---
 # سيبحث Streamlit عن هذه القيم في إعدادات المنصة وليس في الكود
 try:
-    URL = st.secrets["SUPABASE_URL"]
-    KEY = st.secrets["SUPABASE_KEY"]
+    URL = st.secrets["supabase"]["SUPABASE_URL"] # أضفنا ["supabase"] هنا
+    KEY = st.secrets["supabase"]["SUPABASE_KEY"] # أضفنا ["supabase"] هنا
 except KeyError:
-    # في حال كنت تشغل البرنامج محلياً ولم تضبط الـ Secrets بعد
     st.error("⚠️ لم يتم العثور على مفاتيح الاتصال. تأكد من ضبط Secrets في Streamlit Cloud.")
     st.stop()
 
@@ -765,4 +764,5 @@ def restore_from_smart_backup(backup_id):
         error_msg = str(e)
         if "UUID" in error_msg:
             return False, "❌ خطأ في تنسيق المعرفات: يرجى التأكد من تطابق أنواع البيانات في الجداول"
+
         return False, f"❌ فشلت عملية الاستعادة: {error_msg}"
