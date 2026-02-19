@@ -556,7 +556,7 @@ elif choice == "📝 القيود اليومية":
                     with col_info:
                         st.write(f"**البيان:** {row.get('description', '-')}")
                         # معالجة حقل المستخدم والتاريخ بأمان
-                        st.write(f"**التاريخ:** {row.get('jv_date', '-')} | **بواسطة:** {row.get('posted_by', 'Admin')}")
+                        st.write(f"**التاريخ:** {row.get('date', '-')} | **بواسطة:** {row.get('posted_by', 'Admin')}")
                                                     
                     with col_action:
                         # تحديث خاصية العرض إلى width='stretch'
@@ -1011,4 +1011,5 @@ elif choice == "⚙️ الإعدادات":
     st.divider()
     st.subheader("🕵️ سجل العمليات الأخير (Audit Log)")
     audit_data = database.db_fetch("SELECT * FROM audit_log ORDER BY id DESC LIMIT 20")
+
     st.table(audit_data)
